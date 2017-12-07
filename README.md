@@ -455,3 +455,60 @@ some of them to resolve.
 ![image-9](https://i.imgur.com/vxzNbmX.png)
 
 ## Deployment
+
+First, let us turn the caching on. In `service-worker.js` edit the first line
+and change the existing boolean value to `true`.
+
+```javascript
+var doCache = true;
+```
+
+I will be using [Firebase](https://firebase.google.com/) here for deployment.
+First, in Firebase console, create a new project `pwa-example-1`. Now, install
+the firebase-tool we need to deploy our PWA app. We will be installing this
+dependency as a global module.
+
+```shell
+npm install -g firebase-tools
+
+# then run the following commands
+firebase login
+firebase init
+```
+
+Now the CLI tool will prompt for some questions. I am adding a series of images
+for clarity, make sure you choose the same answers when prompted.
+
+![fire-1](https://i.imgur.com/7T039xY.png)
+![fire-2](https://i.imgur.com/9a666pH.png)
+![fire-3](https://i.imgur.com/mYtNpYy.png)
+
+Press the Enter key for final time and you will get a success message and two
+firebase config files generated in your project directory: `.firebaserec` and
+`firebase.json`.
+
+Now, it is time to deploy our app. From terminal run:
+
+```shell
+npm run build && firebase deploy
+```
+
+The above command tells create-react-app to build our project into the build/
+folder, which Firebase CLI tool then deploys. Firebase CLI tool will give you
+back a URL, save it and open it in Chrome, and then run our Lighthouse audit for
+the last time. The hosting url will be similar to below:
+
+```shell
+Hosting URL: https://pwa-example-1.firebaseapp.com
+```
+
+This solves our main issue from starting regarding using HTTTPS over HTTP. With
+that, all of our issues our solved and our PWA app gets 100/100 score.
+
+![image-11](https://i.imgur.com/uOoUE1L.png)
+
+![image-12](https://i.imgur.com/kE8hyuL.png)
+
+The score looks good to me for our first application. The performance of our
+application can be improved and there are few ways to that. I will not get into
+that since the scope of this application is for learning purpose.
